@@ -1,0 +1,23 @@
+ext {
+    android = [
+            compileSdkVersion: 27,
+            applicationId    : "com.example.a1512qmvp2",
+            minSdkVersion    : 15,
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    dependencies = [
+            "appcompat-v7"     : "com.android.support:appcompat-v7:27.1.1",
+            "constraint-layout": "com.android.support.constraint:constraint-layout:1.1.0",
+            "retrofit2"        : "com.squareup.retrofit2:retrofit:2.4.0",
+            "converter-gson"   : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "adapter-rxjava"  :  "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            "rxjava2"          : "io.reactivex.rxjava2:rxjava:2.1.13",
+            "rxjava2:rxandroid": "io.reactivex.rxjava2:rxandroid:2.0.2",
+            "dagger"           : "com.google.dagger:dagger:2.8",
+            "dagger-compiler" : "com.google.dagger:dagger-compiler:2.7"
+
+    ]
+}
