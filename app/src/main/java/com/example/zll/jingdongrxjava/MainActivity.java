@@ -11,7 +11,7 @@ import com.example.zll.jingdongrxjava.ui.myclass.ClassFragment;
 import com.example.zll.jingdongrxjava.fragment.FindFragment;
 import com.example.zll.jingdongrxjava.ui.homepage.HomePageFragment;
 import com.example.zll.jingdongrxjava.fragment.MyFragment;
-import com.example.zll.jingdongrxjava.fragment.ShopCarFragment;
+import com.example.zll.jingdongrxjava.ui.shopcart.ShopCarFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.example.zll.jingdongrxjava;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 import com.example.zll.jingdongrxjava.bean.HomePageBean;
 import com.example.zll.jingdongrxjava.bean.ProductsBean;
 import com.example.zll.jingdongrxjava.component.DaggerHttpComponent;
-import com.example.zll.jingdongrxjava.fragment.ShopCarFragment;
+import com.example.zll.jingdongrxjava.ui.shopcart.ShopCarFragment;
 import com.example.zll.jingdongrxjava.module.HttpModule;
 import com.example.zll.jingdongrxjava.ui.Xiangqing.XiangCrentent;
 import com.example.zll.jingdongrxjava.ui.Xiangqing.XiangqingPresenter;
@@ -25,11 +24,7 @@ import com.example.zll.jingdongrxjava.utils.SharedPreferencesUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
-import java.io.Serializable;
 import java.util.Arrays;
-import java.util.List;
-
-import javax.inject.Inject;
 
 
 public class ListDetailsActivity extends BaseActivity<XiangqingPresenter> implements XiangCrentent.View, View.OnClickListener {
