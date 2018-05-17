@@ -1,27 +1,33 @@
 package com.example.zll.jingdongrxjava;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.StrikethroughSpan;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zll.jingdongrxjava.bean.HomePageBean;
 import com.example.zll.jingdongrxjava.bean.ProductsBean;
 import com.example.zll.jingdongrxjava.component.DaggerHttpComponent;
+import com.example.zll.jingdongrxjava.fragment.ShopCarFragment;
 import com.example.zll.jingdongrxjava.module.HttpModule;
 import com.example.zll.jingdongrxjava.ui.Xiangqing.XiangCrentent;
 import com.example.zll.jingdongrxjava.ui.Xiangqing.XiangqingPresenter;
 import com.example.zll.jingdongrxjava.ui.base.BaseActivity;
 import com.example.zll.jingdongrxjava.utils.GlideImageLoader;
+import com.example.zll.jingdongrxjava.utils.SharedPreferencesUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,6 +40,7 @@ public class ListDetailsActivity extends BaseActivity<XiangqingPresenter> implem
     private TextView tvTitle;
     private TextView tvPrice;
     private TextView tvVipPrice;
+    private HomePageBean.TuijianBean.ListBean listBean;
     /**
      * 购物车
      */
@@ -42,31 +49,37 @@ public class ListDetailsActivity extends BaseActivity<XiangqingPresenter> implem
      * 加入购物车
      */
     private TextView tvAddCard;
-
-
+private int flag;
+private String images;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_details);
-        initView();
+
         Intent intent=getIntent();
-        bean = (ProductsBean.DataBean) intent.getSerializableExtra("bean");
+        flag=intent.getIntExtra("flag",-1);
+        if (flag==-1){
+            return;
+        }
+        if (flag==SousuoActivity.SOUSUOACTIVITY){
+            bean= (ProductsBean.DataBean) intent.getSerializableExtra("bean");
+             images=bean.getImages();
+        }else{
+           listBean= (HomePageBean.TuijianBean.ListBean) intent.getSerializableExtra("bean");
+           images=listBean.getImages();
+        }
+        initView();
         setData();
     }
 
     private void setData() {
-        if (bean==null){
-            return;
+        int money=0;
+        if (flag==SousuoActivity.SOUSUOACTIVITY){
+            money=bean.getSalenum();
+        }else{
+            money=listBean.getSalenum();
         }
-        //设置图片加载器
-        banner.setImageLoader(new GlideImageLoader());
-        String[] imgs = bean.getImages().split("\\|");
-        //设置图片结合
-        banner.setImages(Arrays.asList(imgs));
-        //banner设置方法全部调用完毕时最后调用
-        banner.start();
 
-        tvTitle.setText(bean.getTitle());
         //给原价加横线
         SpannableString spannableString = new SpannableString("原价" + bean.getSalenum());
         StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
@@ -76,12 +89,29 @@ public class ListDetailsActivity extends BaseActivity<XiangqingPresenter> implem
            @Override
            public void OnBannerClick(int position) {
                 Intent intent=new Intent(ListDetailsActivity.this,BannerDetailsActivity.class);
-                intent.putExtra("bean",bean);
+                intent.putExtra("imgs",images);
                 intent.putExtra("position",position);
                 startActivity(intent);
            }
        });
-       tvVipPrice.setText("现价:"+bean.getPrice());
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        String[] imgs = bean.getImages().split("\\|");
+
+        if (flag==SousuoActivity.SOUSUOACTIVITY){
+            imgs=bean.getImages().split("\\|");
+           tvTitle.setText(bean.getTitle());
+            tvVipPrice.setText("现价:"+bean.getPrice());
+        }else {
+            imgs=bean.getImages().split("\\|");
+            tvTitle.setText(bean.getTitle());
+            tvVipPrice.setText("现价:"+listBean.getPrice());
+        }
+        //设置图片结合
+        banner.setImages(Arrays.asList(imgs));
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+
     }
 
     @Override
@@ -120,8 +150,24 @@ public class ListDetailsActivity extends BaseActivity<XiangqingPresenter> implem
     public void onClick(View v) {
       switch (v.getId()){
           case R.id.tvAddCard:
+              String token = (String) SharedPreferencesUtils.getParam(ListDetailsActivity.this, "token", "");
+              if (TextUtils.isEmpty(token)){
+                  Intent intent=new Intent(ListDetailsActivity.this,LoginActivity.class);
+                  startActivity(intent);
+              }else{
+                  String uid = (String) SharedPreferencesUtils.getParam(ListDetailsActivity.this, "uid", "");
+                 int pid=0;
+                 if (flag== SousuoActivity.SOUSUOACTIVITY){
+                     pid=bean.getPid();
+                 }else{
+                     pid=listBean.getPid();
+                 }
+                 mPresenter.getxiang(uid,pid+"",token);
+              }
               break;
           case R.id.tvShopCard:
+              Intent intent=new Intent(ListDetailsActivity.this, ShopCarFragment.class);
+              startActivity(intent);
               break;
       }
     }

@@ -29,6 +29,7 @@ public class SousuoActivity extends BaseActivity<ListPresenter> implements ListC
     private int pscid;
     private boolean isRefresh = true;
     private XrvListAdapter adapter;
+    public static final int SOUSUOACTIVITY= 1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +104,7 @@ private void initView() {
             public void OnItemClick(ProductsBean.DataBean dataBean) {
                 Intent intent = new Intent(SousuoActivity.this, ListDetailsActivity.class);
                 intent.putExtra("bean", dataBean);
+                intent.putExtra("flag",SOUSUOACTIVITY);
                 startActivity(intent);
             }
         });

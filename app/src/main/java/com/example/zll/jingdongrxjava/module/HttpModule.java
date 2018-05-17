@@ -9,6 +9,8 @@ import com.example.zll.jingdongrxjava.net.class1.RightApi;
 import com.example.zll.jingdongrxjava.net.class1.RightService;
 import com.example.zll.jingdongrxjava.net.home.HomeApi;
 import com.example.zll.jingdongrxjava.net.home.HomepagerService;
+import com.example.zll.jingdongrxjava.net.login1.LoginApi;
+import com.example.zll.jingdongrxjava.net.login1.LoginApiService;
 import com.example.zll.jingdongrxjava.net.xiangqing.XiangqingApi;
 import com.example.zll.jingdongrxjava.net.xiangqing.XiangqingApiService;
 
@@ -88,5 +90,16 @@ public class HttpModule {
                 .build();
         XiangqingApiService xiangqingApiService = retrofit.create(XiangqingApiService.class);
         return XiangqingApi.getGetXingqing(xiangqingApiService);
+    }
+    @Provides
+    LoginApi provideLoginApi(OkHttpClient.Builder builder){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        LoginApiService loginApiApiService = retrofit.create(LoginApiService.class);
+        return LoginApi.getLoginApi(loginApiApiService);
     }
 }

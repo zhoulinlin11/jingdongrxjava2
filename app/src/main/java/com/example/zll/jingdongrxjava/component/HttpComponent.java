@@ -3,6 +3,7 @@ package com.example.zll.jingdongrxjava.component;
 
 
 import com.example.zll.jingdongrxjava.ListDetailsActivity;
+import com.example.zll.jingdongrxjava.LoginActivity;
 import com.example.zll.jingdongrxjava.SousuoActivity;
 import com.example.zll.jingdongrxjava.module.HttpModule;
 import com.example.zll.jingdongrxjava.ui.homepage.HomePageFragment;
@@ -17,4 +18,5 @@ public interface HttpComponent {
     void inject(ClassFragment classFragment);
     void inject(SousuoActivity sousuoActivity);
     void inject(ListDetailsActivity listDetailsActivity);
+    void inject(LoginActivity loginActivity);
 }
