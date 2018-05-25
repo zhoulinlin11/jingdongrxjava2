@@ -8,6 +8,7 @@ import com.example.zll.jingdongrxjava.SousuoActivity;
 import com.example.zll.jingdongrxjava.module.HttpModule;
 import com.example.zll.jingdongrxjava.ui.homepage.HomePageFragment;
 import com.example.zll.jingdongrxjava.ui.myclass.ClassFragment;
+import com.example.zll.jingdongrxjava.ui.shopcart.ShopCarFragment;
 
 import dagger.Component;
 
@@ -19,4 +20,5 @@ public interface HttpComponent {
     void inject(SousuoActivity sousuoActivity);
     void inject(ListDetailsActivity listDetailsActivity);
     void inject(LoginActivity loginActivity);
+    void inject(ShopCarFragment shopCarFragment);
 }

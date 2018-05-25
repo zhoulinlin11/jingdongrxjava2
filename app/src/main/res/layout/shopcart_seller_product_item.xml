@@ -62,11 +62,11 @@
                     android:text="12312"
                     android:textColor="#ff0000"/>
 
-                <com.example.a1512qmvp.ui.widget.AddSubView
+                <com.example.zll.jingdongrxjava.ui.shopcart.widget.AddSubView
                     android:id="@+id/addSubCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"></com.example.a1512qmvp.ui.widget.AddSubView>
+                    android:layout_alignParentRight="true"></com.example.zll.jingdongrxjava.ui.shopcart.widget.AddSubView>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

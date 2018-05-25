@@ -11,8 +11,12 @@ import com.example.zll.jingdongrxjava.net.home.HomeApi;
 import com.example.zll.jingdongrxjava.net.home.HomepagerService;
 import com.example.zll.jingdongrxjava.net.login1.LoginApi;
 import com.example.zll.jingdongrxjava.net.login1.LoginApiService;
+import com.example.zll.jingdongrxjava.net.shopcar.DeleteCartApi;
+import com.example.zll.jingdongrxjava.net.shopcar.DeleteCartApiService;
 import com.example.zll.jingdongrxjava.net.shopcar.ShopCarChaApi;
 import com.example.zll.jingdongrxjava.net.shopcar.ShopCarChaApiService;
+import com.example.zll.jingdongrxjava.net.shopcar.UpdateCartApi;
+import com.example.zll.jingdongrxjava.net.shopcar.UpdateCartApiService;
 import com.example.zll.jingdongrxjava.net.xiangqing.XiangqingApi;
 import com.example.zll.jingdongrxjava.net.xiangqing.XiangqingApiService;
 
@@ -115,4 +119,30 @@ public class HttpModule {
         ShopCarChaApiService shopCarChaApiService= retrofit.create(ShopCarChaApiService.class);
         return ShopCarChaApi.getGetCartApi(shopCarChaApiService);
     }
+    @Provides
+    UpdateCartApi provideUpdateCartApi(OkHttpClient.Builder builder) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        UpdateCartApiService updateCartApiService = retrofit.create(UpdateCartApiService.class);
+        return UpdateCartApi.getUpdateCartApi(updateCartApiService);
+    }
+
+    @Provides
+    DeleteCartApi provideDeleteCartApi(OkHttpClient.Builder builder) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Api.BASEURL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(builder.build())
+                .build();
+        DeleteCartApiService deleteCartApiService = retrofit.create(DeleteCartApiService.class);
+        return DeleteCartApi.getDeleteCartApi(deleteCartApiService);
+    }
+
+
+
 }

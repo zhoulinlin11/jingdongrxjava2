@@ -26,10 +26,9 @@
             android:name=".ListDetailsActivity"
             android:label="@string/title_activity_list_details"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BannerDetailsActivity"></activity>
-        <activity android:name=".LoginActivity">
-
-        </activity>
+        <activity android:name=".BannerDetailsActivity" />
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".ui.mine.MakeSureOrderActivity"></activity>
     </application>
 
 </manifest>
